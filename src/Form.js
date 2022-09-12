@@ -9,8 +9,8 @@ import Button from "./component/Button";
 import "./Form.css";
 
 function Form() {
-  // const [submitted, setSubmitted] = useState(false);
-  // const [valid, setValid] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [valid, setValid] = useState(false);
   let schema = yup.object().shape({
     firstName: yup.string().required("پرکردن فیلد الزامی است!"),
     lastName: yup.string().required("پرکردن فیلد الزامی است!"),
@@ -22,8 +22,6 @@ function Form() {
     // reset,
     formState: { errors },
     control,
-    isSubmitted,
-    isValid,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -31,8 +29,8 @@ function Form() {
   const onSubmit = (data, e) => {
     console.log(data);
     e.target.reset();
-    // setSubmitted(true);
-    // setValid(true);
+    setSubmitted(true);
+    setValid(true);
   };
 
   const selectCountryOptions = [
@@ -47,7 +45,7 @@ function Form() {
 
   return (
     <div className="containerForm">
-      {isSubmitted && isValid ? (
+      {submitted && valid ? (
         <div className="alert alert-success" role="alert">
           ارسال فرم با موفقیت انجام شد!
         </div>
