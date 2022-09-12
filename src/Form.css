@@ -1,0 +1,38 @@
+body {
+  direction: rtl;
+}
+.containerForm {
+  position: relative;
+  width: 600px;
+  max-width: 100%;
+  margin: 80px auto;
+  font-family: "iransansRegular";
+}
+.form {
+  padding: 10px 80px;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.column-3 {
+  margin: 40px 3%;
+  position: relative;
+}
+.column-4 {
+  margin: 0 3%;
+  position: relative;
+}
+input[type="file"] {
+  margin: 40px 6%;
+}
+
+.form-control {
+  margin-top: 12px;
+}
+.form-control:focus {
+  color: #000;
+  background-color: #fff;
+  outline: 0;
+  box-shadow: 0 0 0 0 rgb(13 110 253 / 25%);
+}
