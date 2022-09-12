@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 // import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import Button from "./component/Button";
 import "./Form.css";
 
 function Form() {
-  const [submitted, setSubmitted] = useState(false);
-  const [valid, setValid] = useState(false);
   let schema = yup.object().shape({
     firstName: yup.string().required("پرکردن فیلد الزامی است!"),
     lastName: yup.string().required("پرکردن فیلد الزامی است!"),
@@ -19,18 +16,22 @@ function Form() {
   const {
     register,
     handleSubmit,
-    // reset,
+    reset,
     formState: { errors },
     control,
+    formState,
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const { isSubmitting, isSubmitted } = formState;
 
   const onSubmit = (data, e) => {
-    console.log(data);
-    e.target.reset();
-    setSubmitted(true);
-    setValid(true);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+        reset();
+      }, 2000);
+    });
   };
 
   const selectCountryOptions = [
@@ -45,7 +46,7 @@ function Form() {
 
   return (
     <div className="containerForm">
-      {submitted && valid ? (
+      {isSubmitted ? (
         <div className="alert alert-success" role="alert">
           ارسال فرم با موفقیت انجام شد!
         </div>
@@ -76,7 +77,6 @@ function Form() {
             </div>
           </div>
         </div>
-
         <div className="row">
           <div className="col">
             {" "}
@@ -116,13 +116,21 @@ function Form() {
             </div>
           </div>
         </div>
-
         <div className="form-group ">
           <label className="pe-2">آپلود عکس :</label>
           <input type="file" />
         </div>
-
-        <Button>ارسال</Button>
+        <div className="d-flex justify-content-center">
+          <button
+            disabled={isSubmitting || isSubmitted}
+            className="btn btn-success mr-1"
+          >
+            ارسال
+            {isSubmitting && (
+              <span className="spinner-border spinner-border-sm me-1"></span>
+            )}
+          </button>
+        </div>
       </form>
     </div>
   );
